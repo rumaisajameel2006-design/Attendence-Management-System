@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A simple attendance management system for students and teachers.">
+  <title>AttendEase | Attendance Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-mark">A</span><div><strong>AttendEase</strong><small>ATTENDANCE PORTAL</small></div></div>
+    <nav>
+      <a class="nav-link active" href="#dashboard"><span>▦</span> Dashboard</a>
+      <a class="nav-link" href="#roster"><span>♙</span> Student Roster</a>
+      <a class="nav-link" href="#attendance"><span>✓</span> Mark Attendance</a>
+    </nav>
+    <div class="sidebar-note"><div class="note-icon">✦</div><strong>Stay organized</strong><p>Track attendance, review class participation, and export your records.</p></div>
+    <div class="sidebar-footer">STUDENT PROJECT · V1.0</div>
+  </aside>
+
+  <main class="main" id="dashboard">
+    <header class="topbar">
+      <div><p class="eyebrow">OVERVIEW</p><h1>Attendance Dashboard</h1><p class="subtitle">A simple way to keep your class records up to date.</p></div>
+      <div class="today-pill"><span class="live-dot"></span><span id="todayLabel">Today</span></div>
+    </header>
+
+    <section class="stats-grid" aria-label="Attendance summary">
+      <article class="stat-card"><div class="stat-top"><span>Total students</span><span class="stat-icon purple">♙</span></div><div class="stat-number" id="totalStudents">0</div><p class="stat-foot">Students in your roster</p></article>
+      <article class="stat-card"><div class="stat-top"><span>Present today</span><span class="stat-icon green">✓</span></div><div class="stat-number" id="presentCount">0</div><p class="stat-foot" id="presentFoot">0% of students</p></article>
+      <article class="stat-card"><div class="stat-top"><span>Absent today</span><span class="stat-icon red">—</span></div><div class="stat-number" id="absentCount">0</div><p class="stat-foot">Needs follow-up</p></article>
+      <article class="stat-card"><div class="stat-top"><span>Attendance rate</span><span class="stat-icon blue">↗</span></div><div class="stat-number" id="attendanceRate">0%</div><p class="stat-foot">For the selected date</p></article>
+    </section>
+
+    <section class="panel" id="attendance">
+      <div class="panel-heading"><div><p class="eyebrow">DAILY RECORD</p><h2>Mark attendance</h2><p class="panel-subtitle">Choose a date, then set each student's status.</p></div>
+        <div class="date-control"><label for="attendanceDate">Attendance date</label><input type="date" id="attendanceDate"></div>
+      </div>
+      <div class="toolbar">
+        <div class="search-wrap"><span>⌕</span><input id="searchInput" type="search" placeholder="Search name or roll number..." aria-label="Search students"></div>
+        <div class="toolbar-actions">
+          <select id="statusFilter" aria-label="Filter by status"><option value="all">All statuses</option><option value="Present">Present</option><option value="Absent">Absent</option><option value="Late">Late</option><option value="Not marked">Not marked</option></select>
+          <button class="btn btn-secondary" id="markAllPresent">✓ Mark all present</button>
+          <button class="btn btn-primary" id="saveAttendance">Save attendance</button>
+        </div>
+      </div>
+      <div class="table-wrap"><table><thead><tr><th>STUDENT</th><th>ROLL NO.</th><th>STATUS</th><th>QUICK ACTION</th></tr></thead><tbody id="attendanceBody"></tbody></table>
+      <div class="empty-state" id="emptyState" hidden><div class="empty-icon">♙</div><strong>No students found</strong><p>Add a student or change your search/filter.</p></div></div>
+      <div class="table-footer"><span id="showingLabel">Showing 0 students</span><button class="text-button" id="exportCsv">↓ Export CSV</button></div>
+    </section>
+
+    <section class="panel roster-panel" id="roster">
+      <div class="panel-heading"><div><p class="eyebrow">CLASS DIRECTORY</p><h2>Student roster</h2><p class="panel-subtitle">Add and manage the students in your class.</p></div></div>
+      <form id="studentForm" class="add-student-form">
+        <div class="form-field"><label for="studentName">Student name</label><input id="studentName" type="text" placeholder="e.g. Ayesha Khan" maxlength="70" required></div>
+        <div class="form-field"><label for="rollNumber">Roll number</label><input id="rollNumber" type="text" placeholder="e.g. CSE001" maxlength="20" required></div>
+        <button class="btn btn-primary add-button" type="submit">＋ Add student</button>
+      </form>
+      <div id="rosterList" class="roster-list"></div>
+      <p class="privacy-note">Your records are saved in this browser using local storage. Export a CSV backup regularly.</p>
+    </section>
+    <footer class="page-footer">Made for learning · AttendEase Attendance Management System</footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
